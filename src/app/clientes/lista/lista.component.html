@@ -1,0 +1,39 @@
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fas fa-table mr-1"></i>Lista de clientes
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable">
+        <thead>
+          <tr>
+            <th class="id" scope="col">#</th>
+            <th scope="col">NOME</th>
+            <th class="cpf" scope="col">CPF</th>
+            <th class="status" scope="col">STATUS</th>
+            <th class="th-actions">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of getClientes">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nome }}</td>
+            <td class="td-cpf">{{ cliente.cpf | cpf }}</td>
+            <td class="td-status">{{ cliente.status_nome }}</td>
+            <td class="actions">
+              <a class="btn" data-toggle="tooltip" title="Editar" [routerLink]="['/clientes/editar', cliente.id]" >
+                <i class="far fa-edit"></i>
+              </a>
+              <a class="btn" href="#" data-toggle="tooltip" title="Visuaizar">
+                <i class="fas fa-eye"></i>
+              </a>
+              <a class="btn" href="#" data-toggle="tooltip" title="Deletar">
+                <i class="far fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

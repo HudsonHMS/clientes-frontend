@@ -1,0 +1,53 @@
+tbody > tr:nth-child(odd) {
+  background-color: #e9ecef;
+}
+
+tr {
+  transition: all 0.5s;
+}
+
+tbody > tr:hover {
+  background-color: gray;
+}
+
+
+th {
+  text-align: center;
+}
+
+td, th {
+ vertical-align: middle;
+ width: fit-content;
+}
+
+.th-actions, .actions {
+  width: 12%;
+  min-width: 10%;
+  text-align: center;
+}
+
+.id {
+  width: 5%;
+  min-width: 5%;
+}
+
+.cpf {
+  width: 12%;
+  min-width: 9%;
+}
+
+.td-cpf {
+  text-align: center;
+}
+
+.status {
+  width: 5%;
+  min-width: 5%;
+}
+
+.td-status {
+  text-align: center;
+}
+
+
+
