@@ -24,10 +24,10 @@
               <a class="btn" data-toggle="tooltip" title="Editar" [routerLink]="['/clientes/editar', cliente.id]" >
                 <i class="far fa-edit"></i>
               </a>
-              <a class="btn" href="#" data-toggle="tooltip" title="Visuaizar">
+              <a class="btn" href="#" data-toggle="tooltip" title="Visuaizar" [routerLink]="['/clientes/editar', cliente.id]">
                 <i class="fas fa-eye"></i>
               </a>
-              <a class="btn" href="#" data-toggle="tooltip" title="Deletar">
+              <a class="btn" href="#" [attr.client-id]="cliente.id" data-toggle="tooltip" title="Deletar" (click)="deletarCliente($event)">
                 <i class="far fa-trash-alt"></i>
               </a>
             </td>

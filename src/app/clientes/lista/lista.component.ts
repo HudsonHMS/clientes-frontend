@@ -17,11 +17,15 @@ declare var $:any;
 export class ListaComponent implements OnInit, AfterContentChecked {
 
   private clientes!: Cliente[];
+  loader: HTMLDivElement | null = document.querySelector('.loader');
 
   constructor(private clientesService: ClientesService) {}
 
   ngOnInit(): void {
 
+    if( this.loader ) {
+      this.loader.style.display = 'flex';
+    }
     this.clientesService.listarClientesAtivos().subscribe({
         next: ( resp ) => {
           if( resp.responseData ) {
@@ -30,7 +34,16 @@ export class ListaComponent implements OnInit, AfterContentChecked {
             this.clientes = [];
           }
         },
-        error: ( err ) => console.log(err)
+        error: ( err ) => {
+          if( this.loader ) {
+            this.loader.style.display = 'none';
+          }
+        },
+        complete: () => {
+          if( this.loader ) {
+            this.loader.style.display = 'none'
+          }
+        }
 
       })
 
@@ -48,6 +61,30 @@ export class ListaComponent implements OnInit, AfterContentChecked {
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
+  }
+
+  public deletarCliente(event: MouseEvent): void {
+     event.preventDefault();
+     const id : number =  parseInt( ( (<HTMLLinkElement>event?.currentTarget).getAttribute("client-id") ?? "0" ) );
+     if( this.loader ) {
+       this.loader.style.display = 'flex';
+     }
+     this.clientesService.deletarCliente(id).subscribe({
+        next: (res) => {
+          this.clientes = this.clientes.filter( (el) => el.id != id )
+        },
+        error: (err) => {
+          if( this.loader ) {
+            this.loader.style.display = 'none';
+          }
+        },
+
+        complete: () => {
+          if( this.loader ) {
+            this.loader.style.display = 'none';
+          }
+        }
+     });
   }
 
 }

@@ -12,6 +12,11 @@ const routes: Routes = [
     path: "clientes/editar/:id",
     title: "Editar cliente",
     component: EditarClienteComponent
+  },
+  {
+    path: "clientes/visualizar/:id",
+    title: "Editar cliente",
+    component: EditarClienteComponent
   }
 ];
 
