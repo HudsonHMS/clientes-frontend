@@ -1,8 +1,8 @@
 import { ClientesService } from './../../services/clientes.service';
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cliente } from 'src/app/model/cliente';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CpfPipe } from 'src/app/shared/pipes/cpf.pipe';
 
 declare var $:any;
@@ -14,12 +14,13 @@ declare var $:any;
   templateUrl: './lista.component.html',
   styleUrls: ['./lista.component.scss']
 })
-export class ListaComponent implements OnInit, AfterContentChecked {
+export class ListaComponent implements OnInit {
 
   private clientes!: Cliente[];
   loader: HTMLDivElement | null = document.querySelector('.loader');
 
-  constructor(private clientesService: ClientesService) {}
+  constructor(private clientesService: ClientesService, private router: Router) {}
+
 
   ngOnInit(): void {
 
@@ -56,13 +57,6 @@ export class ListaComponent implements OnInit, AfterContentChecked {
     return [];
   }
 
-
-  ngAfterContentChecked(): void {
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-  }
-
   public deletarCliente(event: MouseEvent): void {
      event.preventDefault();
      const id : number =  parseInt( ( (<HTMLLinkElement>event?.currentTarget).getAttribute("client-id") ?? "0" ) );
@@ -86,5 +80,10 @@ export class ListaComponent implements OnInit, AfterContentChecked {
         }
      });
   }
+
+  cadastrarCliente(): void {
+    this.router.navigate(["clientes/visualizar/2"]);
+  }
+
 
 }

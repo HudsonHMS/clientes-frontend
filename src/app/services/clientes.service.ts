@@ -26,4 +26,10 @@ export class ClientesService {
     );
   }
 
+  getClientPorId(id: number): Observable<ResponseObject<Cliente>> {
+    return this.http.get<ResponseObject<Cliente>>(`${this.url_api}clientes/${id}`).pipe(
+      take(1)
+    )
+  }
+
 }

@@ -1,6 +1,11 @@
 <div class="card mb-4">
-  <div class="card-header">
-    <i class="fas fa-table mr-1"></i>Lista de clientes
+  <div class="card-header d-flex justify-content-between">
+    <span>
+      <i class="fas fa-table mr-1"></i>Lista de clientes
+    </span>
+    <button type="button" class="btn btn-outline-success" data-toggle="tooltip" title="Novo cliente" (click)="cadastrarCliente()">
+      <i class="fas fa-plus-square"></i>
+    </button>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -24,7 +29,7 @@
               <a class="btn" data-toggle="tooltip" title="Editar" [routerLink]="['/clientes/editar', cliente.id]" >
                 <i class="far fa-edit"></i>
               </a>
-              <a class="btn" href="#" data-toggle="tooltip" title="Visuaizar" [routerLink]="['/clientes/editar', cliente.id]">
+              <a class="btn" href="#" data-toggle="tooltip" title="Visuaizar" [routerLink]="['/clientes/visualizar', cliente.id]">
                 <i class="fas fa-eye"></i>
               </a>
               <a class="btn" href="#" [attr.client-id]="cliente.id" data-toggle="tooltip" title="Deletar" (click)="deletarCliente($event)">
