@@ -26,7 +26,7 @@
             <td class="td-cpf">{{ cliente.cpf | cpf }}</td>
             <td class="td-status">{{ cliente.status_nome }}</td>
             <td class="actions">
-              <a class="btn" data-toggle="tooltip" title="Editar" [routerLink]="['/clientes/editar', cliente.id]" >
+              <a class="btn" data-toggle="tooltip" title="Editar" (click)="editarCliente(cliente.id!)" >
                 <i class="far fa-edit"></i>
               </a>
               <a class="btn" href="#" data-toggle="tooltip" title="Visuaizar" [routerLink]="['/clientes/visualizar', cliente.id]">

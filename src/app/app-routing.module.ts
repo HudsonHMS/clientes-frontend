@@ -7,6 +7,7 @@ import { ClienteResolver } from './clientes/cliente.resolver';
 import { ServicosRoutingModule } from './servicos/servicos/servicos-routing.module';
 
 const routes: Routes = [
+
   {
     path: "clientes",
     title: "Lista de clientes",
@@ -24,12 +25,16 @@ const routes: Routes = [
     component: EditarClienteComponent,
     resolve: { cliente: ClienteResolver }
   },
-
   {
     path: "servicos",
     title: "Lista de serviços",
     loadChildren: () => import('./servicos/servicos/servicos-routing.module').then( m => m.ServicosRoutingModule )
-  }
+  },
+  {
+    path: '',
+    redirectTo: 'clientes',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

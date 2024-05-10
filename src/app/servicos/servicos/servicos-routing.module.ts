@@ -5,7 +5,7 @@ import { ServicosComponent } from './servicos.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: "servicos",
     pathMatch: "full",
     component: ServicosComponent
   },

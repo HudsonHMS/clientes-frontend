@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TemplateComponent } from './templates/template/template.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CpfPipe } from './shared/pipes/cpf.pipe';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CpfPipe } from './shared/pipes/cpf.pipe';
     CpfPipe
   ],
   providers: [],
+  entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

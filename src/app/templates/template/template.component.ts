@@ -1,3 +1,4 @@
+import { BradcrumbComponent } from './../../shared/bradcrumb/bradcrumb.component';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavSupariorComponent } from '../nav-suparior/nav-suparior.component';
@@ -10,7 +11,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-template',
   standalone: true,
-  imports: [CommonModule, NavSupariorComponent, SidebarComponent, ContentComponent, FooterComponent],
+  imports: [CommonModule, NavSupariorComponent, SidebarComponent, ContentComponent, FooterComponent, BradcrumbComponent],
   templateUrl: './template.component.html',
   styleUrls: ['./template.component.scss']
 })

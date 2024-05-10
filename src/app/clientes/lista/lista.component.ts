@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { Cliente } from 'src/app/model/cliente';
 import { Router, RouterModule } from '@angular/router';
 import { CpfPipe } from 'src/app/shared/pipes/cpf.pipe';
+import { DialogService } from 'src/app/shared/dialog.service';
+import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 
 declare var $:any;
 
@@ -19,7 +21,7 @@ export class ListaComponent implements OnInit {
   private clientes!: Cliente[];
   loader: HTMLDivElement | null = document.querySelector('.loader');
 
-  constructor(private clientesService: ClientesService, private router: Router) {}
+  constructor(private clientesService: ClientesService, private router: Router, private dialog:DialogService) {}
 
 
   ngOnInit(): void {
@@ -47,7 +49,6 @@ export class ListaComponent implements OnInit {
         }
 
       })
-
   }
 
   public get getClientes (): Cliente[] {
@@ -82,8 +83,13 @@ export class ListaComponent implements OnInit {
   }
 
   cadastrarCliente(): void {
-    this.router.navigate(["clientes/visualizar/2"]);
+    this.dialog.open(EditarClienteComponent);
+    this.dialog.setInstanceRefofService = this.dialog;
   }
 
+  editarCliente( clienteId: number ) {
+    this.dialog.open(EditarClienteComponent, {id: clienteId, dialogService: this.dialog, type: this.clientes});
+    this.dialog.setInstanceRefofService = this.dialog;
+  }
 
 }

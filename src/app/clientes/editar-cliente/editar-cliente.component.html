@@ -1,6 +1,23 @@
-<div>
-  <b>Cliente: </b> {{ getCliente?.nome }}
-</div>
-<div>
-  <b>Cpf: </b> {{ getCliente?.cpf }}
+<div class="container justify-content-center">
+  <form [formGroup]="form">
+    <div class="id">
+      <input type="hidden" name="id" id="id" formControlName="id" [value]="getCliente?.id">
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12 col-sd-12 form-field-warper">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" class="form-field" formControlName="nome" [value]="getCliente?.nome">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12 col-sd-12 form-field-warper">
+        <label for="cpf" class="mt-2">Cpf:</label>
+        <input type="text" name="cpf" id="cpf" class="form-field" formControlName="cpf" [value]="getCliente?.cpf">
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button type="button" class="btn btn-outline-dark mt-4">Salvar</button>
+      <button type="button" class="btn btn-outline-dark mt-4" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
 </div>
