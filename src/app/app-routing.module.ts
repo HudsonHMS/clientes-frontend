@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { ListaComponent } from './clientes/lista/lista.component';
 import { EditarClienteComponent } from './clientes/editar-cliente/editar-cliente.component';
 import { post } from 'jquery';
 import { ClienteResolver } from './clientes/cliente.resolver';
 import { ServicosRoutingModule } from './servicos/servicos/servicos-routing.module';
+import { CustomReuseStrategy } from './templates/router-stratege';
 
 const routes: Routes = [
 
   {
     path: "clientes",
     title: "Lista de clientes",
-    component: ListaComponent
+    component: ListaComponent,
+    data: {
+      reuseComponent: true
+    }
   },
   {
     path: "clientes/editar/:id",
@@ -38,7 +42,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), ServicosRoutingModule],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation:'reload'}), ServicosRoutingModule],
+  providers: [
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

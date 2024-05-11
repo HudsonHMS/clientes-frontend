@@ -1,11 +1,12 @@
 import { ClientesService } from './../../services/clientes.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cliente } from 'src/app/model/cliente';
 import { Router, RouterModule } from '@angular/router';
 import { CpfPipe } from 'src/app/shared/pipes/cpf.pipe';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
+import { ComumService } from 'src/app/services/comum.service';
 
 declare var $:any;
 
@@ -21,7 +22,8 @@ export class ListaComponent implements OnInit {
   private clientes!: Cliente[];
   loader: HTMLDivElement | null = document.querySelector('.loader');
 
-  constructor(private clientesService: ClientesService, private router: Router, private dialog:DialogService) {}
+  constructor(private clientesService: ClientesService, private router: Router,
+              private dialog:DialogService, public detector: ChangeDetectorRef) {}
 
 
   ngOnInit(): void {
@@ -32,7 +34,8 @@ export class ListaComponent implements OnInit {
     this.clientesService.listarClientesAtivos().subscribe({
         next: ( resp ) => {
           if( resp.responseData ) {
-            this.clientes = resp.responseData
+            ComumService.tipo = resp.responseData
+            this.clientes = ComumService.tipo;
           }else {
             this.clientes = [];
           }
@@ -83,13 +86,20 @@ export class ListaComponent implements OnInit {
   }
 
   cadastrarCliente(): void {
-    this.dialog.open(EditarClienteComponent);
+    this.dialog.open(EditarClienteComponent, {dialogService: this.dialog, type: this.clientes, style: {'width':'50%', 'height':'40%'}});
     this.dialog.setInstanceRefofService = this.dialog;
+    this.setComumService();
   }
 
   editarCliente( clienteId: number ) {
-    this.dialog.open(EditarClienteComponent, {id: clienteId, dialogService: this.dialog, type: this.clientes});
+    this.dialog.open(EditarClienteComponent, {id: clienteId, dialogService: this.dialog, type: this.clientes, style: {'width':'50%', 'height':'40%'}});
     this.dialog.setInstanceRefofService = this.dialog;
+    this.setComumService();
+  }
+
+  private setComumService(): void {
+    ComumService.detector = this.detector;
+    ComumService.tipo = this.clientes;
   }
 
 }

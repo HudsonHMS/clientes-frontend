@@ -17,8 +17,10 @@ export class DialogComponent implements OnDestroy, AfterViewInit {
   public componentRef!: ComponentRef<any>;
   public childType!: Type<any>;
   public onClose = this._onClose.asObservable();
-  private data!: {id?:number, dialogService?:DialogService, type?: any};
+  private data!: {id?:number, dialogService?:DialogService, type?: any, style?: {[klass:string]: any}};
   private openService!: DialogService;
+
+  private openStile: { [klass: string]: any; } = { 'width': '50%', 'height': '50%' };
 
   constructor( private detector: ChangeDetectorRef ){}
 
@@ -44,6 +46,7 @@ export class DialogComponent implements OnDestroy, AfterViewInit {
   }
 
   private loadChildComponent ( component: Type<any> ): void {
+      this.setOpenStile = this.data.style!;
       const viewRef: ViewContainerRef = this.insertPoint.viewContainerRef;
       this.componentRef = viewRef.createComponent(component);
       this.componentRef.instance.setDialogData( this.data.id, this.data.dialogService, this.data.type );
@@ -59,6 +62,14 @@ export class DialogComponent implements OnDestroy, AfterViewInit {
 
   public set setService( service: DialogService ) {
     this.openService = service;
+  }
+
+  public set setOpenStile ( style: { [klass: string]: any; } ) {
+    this.openStile = style;
+  }
+
+  public get getOpenStile ( ) {
+    return this.openStile;
   }
 
 }

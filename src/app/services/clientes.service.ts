@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { delay, Observable, take } from 'rxjs';
 import { ResponseObject } from '../model/response-object';
 import { Cliente } from '../model/cliente';
@@ -30,6 +30,28 @@ export class ClientesService {
     return this.http.get<ResponseObject<Cliente>>(`${this.url_api}clientes/${id}`).pipe(
       take(1)
     )
+  }
+
+  editarCliente( cliente: Cliente ): Observable<ResponseObject<Cliente>> {
+    const headers: HttpHeaders = new HttpHeaders();
+    headers.append('Content-type', 'application/json')
+    return this.http.put<ResponseObject<Cliente>>(`${this.url_api}clientes`,cliente, {
+       headers: headers
+    })
+    .pipe(
+      take(1)
+    );
+  }
+
+  cadastrarCliente( cliente: Cliente ): Observable<ResponseObject<Cliente>> {
+    const headers: HttpHeaders = new HttpHeaders();
+    headers.append('Content-type', 'application/json')
+    return this.http.post<ResponseObject<Cliente>>(`${this.url_api}clientes/add`,cliente, {
+       headers: headers
+    })
+    .pipe(
+      take(1)
+    );
   }
 
 }

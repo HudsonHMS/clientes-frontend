@@ -39,7 +39,7 @@ export class DialogService {
     this.dialogComponentRef.destroy();
   }
 
-  public open( component: Type<any>, data: {id?:number, dialogService?:DialogService, type?: any} = {} ) {
+  public open( component: Type<any>, data: {id?:number, dialogService?:DialogService, type?: any, style?:{[klass:string]:any}} = {} ) {
     this.appendDialogComponentToBody();
     this.dialogComponentRef.instance.setData = data;
     this.dialogComponentRef.instance.childType = component;
