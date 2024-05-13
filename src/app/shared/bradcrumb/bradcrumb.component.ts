@@ -36,7 +36,7 @@ export class BradcrumbComponent implements OnInit {
   }
 
   public get getBuildBreadcrumb(): string[] {
-    return this.bradcrumb.split('/');
+    return this.bradcrumb.split('/').filter( rota => !Number.isInteger( parseInt(rota) ) );
   }
 
 }

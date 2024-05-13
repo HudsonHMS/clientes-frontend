@@ -25,3 +25,12 @@ form {
   width: 100%;
   padding: 10px;
 }
+
+small.error {
+  color: red;
+}
+
+.input-error {
+  outline: red;
+  border: 1px solid red;
+}

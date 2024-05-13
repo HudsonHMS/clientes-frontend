@@ -10,6 +10,12 @@ import { CustomReuseStrategy } from './templates/router-stratege';
 const routes: Routes = [
 
   {
+    path: '',
+    redirectTo: 'clientes',
+    pathMatch: 'full'
+  },
+
+  {
     path: "clientes",
     title: "Lista de clientes",
     component: ListaComponent,
@@ -17,27 +23,25 @@ const routes: Routes = [
       reuseComponent: true
     }
   },
+
   {
     path: "clientes/editar/:id",
     title: "Editar cliente",
     component: EditarClienteComponent,
     resolve: { cliente: ClienteResolver }
   },
+
   {
     path: "clientes/visualizar/:id",
     title: "Visualizar cliente",
     component: EditarClienteComponent,
     resolve: { cliente: ClienteResolver }
   },
+
   {
     path: "servicos",
     title: "Lista de serviços",
     loadChildren: () => import('./servicos/servicos/servicos-routing.module').then( m => m.ServicosRoutingModule )
-  },
-  {
-    path: '',
-    redirectTo: 'clientes',
-    pathMatch: 'full'
   },
 ];
 

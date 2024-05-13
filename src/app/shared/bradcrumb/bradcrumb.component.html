@@ -1,5 +1,5 @@
 <span *ngFor="let rota of getBuildBreadcrumb, let i = index">
-  <ng-container *ngIf="i < (getBuildBreadcrumb.length -1); else last" context:rota>
+  <ng-container *ngIf="i < (getBuildBreadcrumb.length -1) && rota; else last" context:rota>
     <a [routerLink]="rota != 'home' ? rota: ''">
       {{ rota.charAt(0).toUpperCase() + rota.slice(1) }}
     </a>

@@ -5,14 +5,16 @@
     </div>
     <div class="row">
       <div class="col-12 col-md-12 col-sd-12 form-field-warper">
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" class="form-field" formControlName="nome">
+        <label for="nome">Nome <span class="error">*</span></label>
+        <input #nome type="text" name="nome" id="nome" class="form-field" formControlName="nome" [ngClass]="{'input-error':!this.form.get('nome')?.valid}">
+        <span>{{ nome.value.length }} / 255 caracteres</span>
+        <small class="error" *ngIf="!form.get('nome')?.valid">Campo com erros favor verificar</small>
       </div>
     </div>
     <div class="row">
       <div class="col-12 col-md-12 col-sd-12 form-field-warper">
         <label for="cpf" class="mt-2">Cpf:</label>
-        <input type="text" name="cpf" id="cpf" class="form-field" formControlName="cpf">
+        <input type="text" name="cpf" id="cpf" class="form-field" formControlName="cpf" cpf>
       </div>
     </div>
     <div class="row justify-content-center btns">

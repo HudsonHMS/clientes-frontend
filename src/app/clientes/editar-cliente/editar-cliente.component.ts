@@ -1,3 +1,4 @@
+import { CustomValidator } from './../../shared/validators/custom-validator';
 import { Cliente } from './../../model/cliente';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
@@ -6,11 +7,13 @@ import { ClientesService } from 'src/app/services/clientes.service';
 import { DialogService } from 'src/app/shared/dialog.service';
 import { teste } from 'src/app/model/teste';
 import { Router, RouterModule } from '@angular/router';
+import { CpfDirective } from 'src/app/shared/cpf.directive';
+import { mask } from 'src/app/shared/utils/cpf-mask';
 
 @Component({
   selector: 'app-editar-cliente',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, CpfDirective],
   templateUrl: './editar-cliente.component.html',
   styleUrls: ['./editar-cliente.component.scss']
 })
@@ -40,7 +43,11 @@ export class EditarClienteComponent implements OnInit, teste {
   public form: FormGroup = this.fb.group({
     id: [null],
     nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-    cpf: ['', [Validators.maxLength(11), Validators.minLength(11), Validators.required]],
+    cpf: ['', {
+               validators: [Validators.maxLength(14), Validators.minLength(11), Validators.required, CustomValidator.cpf],
+               updateOn: 'change'
+              }
+         ],
     status_id: [1]
 });
 
@@ -51,7 +58,7 @@ export class EditarClienteComponent implements OnInit, teste {
           this.cliente = cli.responseData!;
           this.form.get('id')?.setValue(cli.responseData?.id);
           this.form.get('nome')?.setValue(cli.responseData?.nome);
-          this.form.get('cpf')?.setValue(cli.responseData?.cpf);
+          this.form.get('cpf')?.setValue(mask(cli.responseData?.cpf!));
         }
       });
     }
@@ -70,12 +77,12 @@ export class EditarClienteComponent implements OnInit, teste {
   }
 
   cancelar() {
-    console.log( 'Cancelar' );
     this.dialogService?.close();
   }
 
   salvar() {
     if( this.form.valid ) {
+      this.form.get('cpf')?.setValue( this.form.get('cpf')?.value.replaceAll(/\.|-|\//g,'') );
       if( !!this.form.get('id')?.value ) {
         this.clienteService.editarCliente( this.form.value ).subscribe();
       } else {
@@ -89,5 +96,7 @@ export class EditarClienteComponent implements OnInit, teste {
     }
     this.dialogService?.close();
   }
+
+
 
 }

@@ -1,9 +1,13 @@
 <div id="layoutSidenav_nav">
-  <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" aria-label="side-nav">
+  <nav
+    class="sb-sidenav accordion sb-sidenav-dark"
+    id="sidenavAccordion"
+    aria-label="side-nav"
+  >
     <div class="sb-sidenav-menu">
       <div class="nav">
         <div class="sb-sidenav-menu-heading">Meus clientes</div>
-        <a class="nav-link" [routerLink]="['clientes']"
+        <a class="nav-link" [routerLink]="['/clientes']"
           ><div class="sb-nav-link-icon">
             <i class="fas fa-table mr-1"></i>
           </div>
@@ -29,8 +33,16 @@
           data-parent="#sidenavAccordion"
         >
           <nav class="sb-sidenav-menu-nested nav" aria-label="side-menu">
-            <a class="nav-link" href="layout-static.html" [routerLink]="['servicos']">Listar serviços</a
-            ><a class="nav-link" href="layout-sidenav-light.html" [routerLink]="['servicos/cadastrar']"
+            <a
+              class="nav-link"
+              href="layout-static.html"
+              [routerLink]="['/servicos']"
+              >Listar serviços</a
+            >
+            <a
+              class="nav-link"
+              href="layout-sidenav-light.html"
+              [routerLink]="['/servicos/cadastrar']"
               >Cadastrar Servicos</a
             >
           </nav>
